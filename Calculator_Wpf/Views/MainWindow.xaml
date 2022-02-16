@@ -1,0 +1,297 @@
+﻿<Window x:Class="Calculator_Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calculator_Wpf"
+        xmlns:vm="clr-namespace:Calculator_Wpf.ViewModels"
+        mc:Ignorable="d"
+        Title="Калькулятор" Height="440" Width="350" FontSize="20" ResizeMode="NoResize" Background="#FF4BA0E5">
+    <!-- ResizeMode="NoResize" - нельзя изменить размер окна -->
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    
+    <!--Общий стиль для всех элементов Button-->
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="BtStyle">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Margin" Value="2,2,2,2" />
+            <Setter Property="BorderThickness" Value="1,1,3,3"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid x:Name="LayoutRoot" >
+        <Grid.RowDefinitions>
+            <!--создаем 2 строки-->
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="6*"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <!-- Устанавливаем 4 столбца -->
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="display" Grid.Column="0" Grid.ColumnSpan="4" Margin="2,0,2,1.4"  Background="#FFD2E8FB"  
+                  TextAlignment="Right" FontSize="42" Text="{Binding Path=DisplayCalculator}"/>
+
+
+        <UniformGrid  Grid.Row="2" Rows="6" Columns="4" Margin="0,0,0,1.4" Grid.ColumnSpan="4" >
+
+            <Button Content="%"  Style="{StaticResource BtStyle}"
+                    Command="{Binding OneOperationButtonCommand}" CommandParameter="%">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF4BA0E5" Offset="0"/>
+                        <GradientStop Color="#FF4BA0E5" Offset="1"/>
+                        <GradientStop Color="#FFE2EDF6" Offset="0.496"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="CE" Style="{StaticResource BtStyle}" 
+                    Command="{Binding ClearButtonCommand}" CommandParameter="СE">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF4BA0E5" Offset="0"/>
+                        <GradientStop Color="#FF4BA0E5" Offset="1"/>
+                        <GradientStop Color="#FFE2EDF6" Offset="0.496"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="C" Style="{StaticResource BtStyle}"
+                    Command="{Binding ClearButtonCommand}" CommandParameter="C">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF4BA0E5" Offset="0"/>
+                        <GradientStop Color="#FF4BA0E5" Offset="1"/>
+                        <GradientStop Color="#FFE2EDF6" Offset="0.496"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="←" Style="{StaticResource BtStyle}"
+                    Command="{Binding DeleteButtonCommand}" CommandParameter="←">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF4BA0E5" Offset="0"/>
+                        <GradientStop Color="#FF4BA0E5" Offset="1"/>
+                        <GradientStop Color="#FFE2EDF6" Offset="0.496"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="1/x" Style="{StaticResource BtStyle}"
+                    Command="{Binding OneOperationButtonCommand}" CommandParameter="1/x">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF4BA0E5" Offset="0"/>
+                        <GradientStop Color="#FF4BA0E5" Offset="1"/>
+                        <GradientStop Color="#FFE2EDF6" Offset="0.496"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="x²" Style="{StaticResource BtStyle}"
+                     Command="{Binding OneOperationButtonCommand}" CommandParameter="sqr">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF4BA0E5" Offset="0"/>
+                        <GradientStop Color="#FF4BA0E5" Offset="1"/>
+                        <GradientStop Color="#FFE2EDF6" Offset="0.496"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="√x" Style="{StaticResource BtStyle}"
+                    Command="{Binding OneOperationButtonCommand}" CommandParameter="sqrt">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF4BA0E5" Offset="0"/>
+                        <GradientStop Color="#FF4BA0E5" Offset="1"/>
+                        <GradientStop Color="#FFE2EDF6" Offset="0.496"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+            <Button Content="/" Style="{StaticResource BtStyle}" 
+                    Command="{Binding TwoOperationButtonCommand}" CommandParameter="/">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF4BA0E5" Offset="0"/>
+                        <GradientStop Color="#FF4BA0E5" Offset="1"/>
+                        <GradientStop Color="#FFE2EDF6" Offset="0.496"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="7" Style="{StaticResource BtStyle}"
+                    Command="{Binding DigitalButtonCommand}" CommandParameter="7">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF7CE2D9" Offset="0"/>
+                        <GradientStop Color="#FF7CE2D9" Offset="0.99"/>
+                        <GradientStop Color="#FFCBE8E5" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="8" Style="{StaticResource BtStyle}"
+                    Command="{Binding DigitalButtonCommand}" CommandParameter="8">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF7CE2D9" Offset="0"/>
+                        <GradientStop Color="#FF7CE2D9" Offset="0.99"/>
+                        <GradientStop Color="#FFCBE8E5" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="9" Style="{StaticResource BtStyle}"
+                    Command="{Binding DigitalButtonCommand}" CommandParameter="9">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF7CE2D9" Offset="0"/>
+                        <GradientStop Color="#FF7CE2D9" Offset="0.99"/>
+                        <GradientStop Color="#FFCBE8E5" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+            <Button Content="*" Style="{StaticResource BtStyle}"
+                    Command="{Binding TwoOperationButtonCommand}" CommandParameter="*">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF4BA0E5" Offset="0"/>
+                        <GradientStop Color="#FF4BA0E5" Offset="1"/>
+                        <GradientStop Color="#FFE2EDF6" Offset="0.496"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+            <Button Content="4" Style="{StaticResource BtStyle}"
+                    Command="{Binding DigitalButtonCommand}" CommandParameter="4">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF7CE2D9" Offset="0"/>
+                        <GradientStop Color="#FF7CE2D9" Offset="0.99"/>
+                        <GradientStop Color="#FFCBE8E5" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="5"  Style="{StaticResource BtStyle}"
+                    Command="{Binding DigitalButtonCommand}" CommandParameter="5">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF7CE2D9" Offset="0"/>
+                        <GradientStop Color="#FF7CE2D9" Offset="0.99"/>
+                        <GradientStop Color="#FFCBE8E5" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="6" Style="{StaticResource BtStyle}"
+                    Command="{Binding DigitalButtonCommand}" CommandParameter="6">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF7CE2D9" Offset="0"/>
+                        <GradientStop Color="#FF7CE2D9" Offset="0.99"/>
+                        <GradientStop Color="#FFCBE8E5" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+            <Button Content="-" Style="{StaticResource BtStyle}"
+                    Command="{Binding TwoOperationButtonCommand}" CommandParameter="-">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF4BA0E5" Offset="0"/>
+                        <GradientStop Color="#FF4BA0E5" Offset="1"/>
+                        <GradientStop Color="#FFE2EDF6" Offset="0.496"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+            <Button Content="1" Style="{StaticResource BtStyle}"
+                    Command="{Binding DigitalButtonCommand}" CommandParameter="1">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF7CE2D9" Offset="0"/>
+                        <GradientStop Color="#FF7CE2D9" Offset="0.99"/>
+                        <GradientStop Color="#FFCBE8E5" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="2" Style="{StaticResource BtStyle}"
+                    Command="{Binding DigitalButtonCommand}" CommandParameter="2">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF7CE2D9" Offset="0"/>
+                        <GradientStop Color="#FF7CE2D9" Offset="0.99"/>
+                        <GradientStop Color="#FFCBE8E5" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="3" Style="{StaticResource BtStyle}" 
+                    Command="{Binding DigitalButtonCommand}" CommandParameter="3">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF7CE2D9" Offset="0"/>
+                        <GradientStop Color="#FF7CE2D9" Offset="0.99"/>
+                        <GradientStop Color="#FFCBE8E5" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+            <Button Content="+" Style="{StaticResource BtStyle}"
+                    Command="{Binding TwoOperationButtonCommand}" CommandParameter="+">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF4BA0E5" Offset="0"/>
+                        <GradientStop Color="#FF4BA0E5" Offset="1"/>
+                        <GradientStop Color="#FFE2EDF6" Offset="0.496"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+            <Button Content="+/-" Style="{StaticResource BtStyle}" 
+                    Command="{Binding DigitalButtonCommand}" CommandParameter="+/-">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF7CE2D9" Offset="0"/>
+                        <GradientStop Color="#FF7CE2D9" Offset="0.99"/>
+                        <GradientStop Color="#FFCBE8E5" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="0" Style="{StaticResource BtStyle}"
+                    Command="{Binding DigitalButtonCommand}" CommandParameter="0">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF7CE2D9" Offset="0"/>
+                        <GradientStop Color="#FF7CE2D9" Offset="0.99"/>
+                        <GradientStop Color="#FFCBE8E5" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="," Style="{StaticResource BtStyle}"
+                    Command="{Binding DigitalButtonCommand}" CommandParameter=",">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF7CE2D9" Offset="0"/>
+                        <GradientStop Color="#FF7CE2D9" Offset="0.99"/>
+                        <GradientStop Color="#FFCBE8E5" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+            <Button Content="=" Style="{StaticResource BtStyle}"
+                    Command="{Binding TwoOperationButtonCommand}" CommandParameter="=">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF4BA0E5" Offset="0"/>
+                        <GradientStop Color="#FF4BA0E5" Offset="1"/>
+                        <GradientStop Color="#FFE2EDF6" Offset="0.496"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </UniformGrid>
+    </Grid>
+</Window>
